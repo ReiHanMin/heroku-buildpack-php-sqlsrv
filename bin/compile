@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+echo "-----> Installing SQLSRV PHP extensions"
+
+# Ensure dependencies are installed
+apt-get update && apt-get install -y \
+  unixodbc-dev \
+  libgssapi-krb5-2
+
+# Install the PHP extensions
+docker-php-ext-install pdo_sqlsrv sqlsrv
+
+echo "-----> SQLSRV PHP extensions installed"
